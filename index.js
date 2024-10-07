@@ -3,13 +3,16 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const TodoModel = require('./Models/Todo.js')
 
+const dotenv = require('dotenv')
+dotenv.config()
+const password = process.env.MONGO_PASSWORD
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
 // connecting to database
-mongoose.connect("mongodb+srv://dpansumisra:deepanshu@cluster0.olcse.mongodb.net/todolist?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(`mongodb+srv://dpansumisra:${password}@cluster0.olcse.mongodb.net/todolist?retryWrites=true&w=majority&appName=Cluster0`)
 .then(()=>console.log("database connect hain")).catch((error)=>console.log(error.message))
 
 app.get('/get', (req, res)=>{
